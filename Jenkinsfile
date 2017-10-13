@@ -8,7 +8,8 @@ pipeline {
     }
     stage('Building and pushing vote image') {
       steps {
-        sh '''{
+        sh '''node
+{
     docker.withRegistry(\'https://10.1.53.4/\',\'dtr-login\'){
        // dtr-login is a login ID in credentials 
         stage "syncing files"
@@ -17,7 +18,7 @@ pipeline {
         def vote_img = docker.build(\'dockeradmin/voting-app-vote\',\'./vote\').push(\'latest\')
         }
 }'''
-        }
       }
     }
   }
+}
